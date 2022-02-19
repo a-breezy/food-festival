@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
 	entry: {
@@ -46,6 +47,27 @@ module.exports = {
 		// new BundleAnalyzerPlugin({
 		// 	analyzerMode: "static", // report outputs an HTML file (report.html) to dist folder
 		// }),
+		new WebpackPwaManifest({
+			name: "Food Event",
+			short_name: "Foodies",
+			description: "An app that allows you to view the upcoming food events.",
+			start_url: "../index.html",
+			background_color: "#01579b",
+			theme_color: "#ffffff",
+			// tells webpack not to create new fingerprints every time manifest is created
+			fingerprints: false,
+			// determines whether or not to add manifest.json to html
+			inject: false,
+			// provides an icon to user's homepage
+			icons: [
+				{
+					src: path.resolve("assets/img/icons/icon-512x512.png"),
+					sizes: [96, 128, 192, 256, 384, 512],
+					// designates where icons are sent after creation of manifest
+					destination: path.join("assets", "icons"),
+				},
+			],
+		}),
 	],
 	devServer: {
 		static: {
