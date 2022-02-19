@@ -43,9 +43,16 @@ module.exports = {
 			$: "jquery",
 			jQuery: "jquery",
 		}),
-		new BundleAnalyzerPlugin({
-			analyzerMode: "static", // report outputs an HTML file (report.html) to dist folder
-		}),
+		// new BundleAnalyzerPlugin({
+		// 	analyzerMode: "static", // report outputs an HTML file (report.html) to dist folder
+		// }),
 	],
+	devServer: {
+		static: {
+			directory: path.join(__dirname, "./"),
+		},
+		compress: true,
+		port: 8080,
+	},
 	mode: "development",
 };
